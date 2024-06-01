@@ -4,11 +4,9 @@ import 'package:flutterbrasil/features/home/view/home_view.dart';
 import 'package:flutterbrasil/features/login/view/login_view.dart';
 import 'package:flutterbrasil/features/register/view/register_view.dart';
 import 'package:flutterbrasil/features/save_task/view/save_task.dart';
-import 'core/provider/providers.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  setupProviders();
   runApp(const MyApp());
 }
 
