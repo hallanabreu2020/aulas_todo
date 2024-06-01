@@ -29,6 +29,8 @@ class LightTheme {
       displayMedium: TextStyle(fontSize: 32, color: Colors.white, fontWeight: FontWeight.w800),
       displaySmall: TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
       headlineLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+      headlineSmall: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, overflow: TextOverflow.ellipsis),
+      titleLarge: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: Colors.white),
     ),
     inputDecorationTheme: InputDecorationTheme(
       prefixIconColor: Colors.white,

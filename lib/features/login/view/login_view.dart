@@ -26,9 +26,15 @@ class LoginView extends StatelessWidget {
                   Align(alignment: Alignment.centerLeft ,child: Text("Senha", style: Theme.of(context).textTheme.displayLarge)),
                   const SizedBox(height: 10),
                   TextFormField(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: InkWell(
+                      onTap: ()=> Navigator.pushNamed(context, "/register"),
+                      child: Text("Criar conta", style: Theme.of(context).textTheme.titleLarge)),
+                  ),
                 ],
               ),
-              ElevatedButton(onPressed: (){Navigator.pushNamed(context, "/register");}, child: const Text("Login")),
+              ElevatedButton(onPressed: (){Navigator.pushNamed(context, "/home", arguments: 30);}, child: const Text("Login")),
             ],
           ),
         ),

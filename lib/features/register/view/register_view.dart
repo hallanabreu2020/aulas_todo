@@ -30,6 +30,12 @@ class RegisterView extends StatelessWidget {
                   Align(alignment: Alignment.centerLeft ,child: Text("Senha", style: Theme.of(context).textTheme.displayLarge)),
                   const SizedBox(height: 10),
                   TextFormField(),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: InkWell(
+                      onTap: ()=> Navigator.pushNamed(context, "/"),
+                      child: Text("Fazer login", style: Theme.of(context).textTheme.titleLarge)),
+                  ),
                 ],
               ),
               ElevatedButton(onPressed: (){Navigator.pushNamed(context, "/");}, child: const Text("Cadastro")),
