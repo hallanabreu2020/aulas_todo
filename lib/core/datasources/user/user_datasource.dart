@@ -1,7 +1,8 @@
 import 'package:dio/dio.dart';
 
 class UserDatasource {
-  Dio dio = Dio();
+  final Dio dio;
+  UserDatasource({required this.dio});
 
   Future<bool> login({required String email, required String password})async{
     String urlbase = "https://parseapi.back4app.com/parse/functions/";

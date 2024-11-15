@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutterbrasil/core/datasources/user/user_datasource.dart';
 
 class LoginController with ChangeNotifier{
-  UserDatasource userDatasource = UserDatasource();
+  final UserDatasource userDatasource;
+  LoginController({required this.userDatasource});
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

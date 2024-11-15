@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutterbrasil/features/login/controller/login_controller.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
-
-  @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-
-  LoginController loginController = LoginController();
+class LoginView extends StatelessWidget {
+  final LoginController loginController;
+  const LoginView({super.key, required this.loginController});
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +46,7 @@ class _LoginViewState extends State<LoginView> {
                   ElevatedButton(onPressed: ()async{
                     bool teste = await loginController.login();
                     if(teste){
-                      Navigator.pushNamed(context, "/home", arguments: 30);
+                      if(context.mounted) Navigator.pushNamed(context, "/home", arguments: 30);
                     }
                   }, child: loginController.isLoand
                    ?const CircularProgressIndicator()
