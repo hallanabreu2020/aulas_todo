@@ -1,7 +1,49 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+
+
+  bool isLoand = false;
+  gerenciadorDeEstado(bool value){
+    setState(() {
+      isLoand = value;
+    });
+  }
+
+  Future<bool> datasource()async{
+    Dio dio = Dio();
+    String urlbase = "https://parseapi.back4app.com/parse/functions/";
+    Map<String, dynamic> data = {
+      "email":"hallanabreudev@gmail.com",
+      "password":"123456789"
+    };
+    Map<String, dynamic> headers = {
+      "Context-type": "application/json",
+      "X-Parse-Application-Id": "yXS4x5THhmqy5iqcL35EjfUl5vztpADZ3kNJ9KO7",
+      "X-Parse-REST-API-Key": "M2iyPo2pq8IVAPa9hbZNUsfCmplhEzt0PDvk81i0",
+      "X-Parse-Session-Token": "r:237271cd8b6bd701a6124c58d2f5b912"
+    };
+    try {
+      Response response = await dio.post(
+        '${urlbase}login',
+        data: data,
+        options: Options(
+          headers: headers
+        )
+      );
+      return true;
+    } on DioException catch (e) {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +76,21 @@ class LoginView extends StatelessWidget {
                   ),
                 ],
               ),
-              ElevatedButton(onPressed: (){Navigator.pushNamed(context, "/home", arguments: 30);}, child: const Text("Login")),
+              ElevatedButton(onPressed: ()async{
+                if(isLoand) return;
+                gerenciadorDeEstado(true);
+                bool teste = await datasource();
+                print(teste);
+                gerenciadorDeEstado(false);
+                if(teste){
+                  Navigator.pushNamed(context, "/home", arguments: 30);
+                }else{
+                  print('Erro ao logar');
+                }
+                
+              }, child: isLoand
+               ?const CircularProgressIndicator()
+               :const Text("Login")),
             ],
           ),
         ),
