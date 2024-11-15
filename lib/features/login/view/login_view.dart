@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterbrasil/features/login/controller/login_controller.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -10,13 +11,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-
-  bool isLoand = false;
-  gerenciadorDeEstado(bool value){
-    setState(() {
-      isLoand = value;
-    });
-  }
+  LoginController loginController = LoginController();
 
   Future<bool> datasource()async{
     Dio dio = Dio();
@@ -63,11 +58,15 @@ class _LoginViewState extends State<LoginView> {
                 children: [
                   Align(alignment: Alignment.centerLeft ,child: Text("Email", style: Theme.of(context).textTheme.displayLarge)),
                   const SizedBox(height: 10),
-                  TextFormField(),
+                  TextFormField(
+                    controller: loginController.emailController,
+                  ),
                   const SizedBox(height: 20),
                   Align(alignment: Alignment.centerLeft ,child: Text("Senha", style: Theme.of(context).textTheme.displayLarge)),
                   const SizedBox(height: 10),
-                  TextFormField(),
+                  TextFormField(
+                    controller: loginController.passwordController,
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 30),
                     child: InkWell(
@@ -77,18 +76,18 @@ class _LoginViewState extends State<LoginView> {
                 ],
               ),
               ElevatedButton(onPressed: ()async{
-                if(isLoand) return;
-                gerenciadorDeEstado(true);
+                if(loginController.isLoand) return;
+                loginController.gerenciadorDeEstado(true);
                 bool teste = await datasource();
                 print(teste);
-                gerenciadorDeEstado(false);
+                loginController.gerenciadorDeEstado(false);
                 if(teste){
                   Navigator.pushNamed(context, "/home", arguments: 30);
                 }else{
                   print('Erro ao logar');
                 }
                 
-              }, child: isLoand
+              }, child: loginController.isLoand
                ?const CircularProgressIndicator()
                :const Text("Login")),
             ],
